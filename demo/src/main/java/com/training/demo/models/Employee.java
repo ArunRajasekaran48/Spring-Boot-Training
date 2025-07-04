@@ -14,7 +14,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return this.id+"-"+this.name+"-"+this.role;
+        return "id:"+this.id+"\n"+"name:"+this.name+"\n"+"role:"+this.role;
     }
 
     public int getId() {
