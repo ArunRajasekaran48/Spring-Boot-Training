@@ -20,8 +20,12 @@ public class EmployeeService {
     }
 
     public Employee createEmployee(Employee employee) {
+        if (employee.getId() != 0 && employeeRepository.existsById(employee.getId())) {
+            throw new RuntimeException("Employee already exists with id: " + employee.getId());
+        }
         return employeeRepository.save(employee);
     }
+
 
     public Employee getEmployeeById(int id) {
         return employeeRepository.findById(id).orElse(null);
