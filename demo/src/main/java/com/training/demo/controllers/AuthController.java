@@ -23,12 +23,6 @@ public class AuthController {
     }
 
 
-    /// LOGIN
-    @GetMapping("/login")
-    public String Login(){
-        return "Employee Login Successfully";
-    }
-
     @PostMapping("/login")
     public String authPostControllerLogin(@RequestBody RegisterDetails login){
         return authService.authPostLoginService(login);}
