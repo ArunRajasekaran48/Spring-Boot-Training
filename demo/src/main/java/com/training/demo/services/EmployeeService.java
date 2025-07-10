@@ -1,48 +1,42 @@
 package com.training.demo.services;
-
-import com.training.demo.models.Employee;
-import com.training.demo.repository.EmployeeRepository;
+import com.training.demo.models.RegisterDetails;
+import com.training.demo.repository.RegisterDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class EmployeeService {
-
     @Autowired
-    private EmployeeRepository employeeRepository;
+    RegisterDetailsRepository registerDetailsRepository;
 
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+
+    public List<RegisterDetails> getMethod() {
+        return registerDetailsRepository.findAll();
     }
 
-    public Employee createEmployee(Employee employee) {
-        if (employee.getId() != 0 && employeeRepository.existsById(employee.getId())) {
-            throw new RuntimeException("Employee already exists with id: " + employee.getId());
-        }
-        return employeeRepository.save(employee);
+    public RegisterDetails getEmployeeById(int empId) {
+        return registerDetailsRepository.findById(empId).orElse(new RegisterDetails());
     }
 
+//    public List<RegisterDetails> getEmployeeByJob() {
+//        return registerDetailsRepository.findByRole();
+//    }
 
-    public Employee getEmployeeById(int id) {
-        return employeeRepository.findById(id).orElse(null);
+    public String addEmployee(RegisterDetails employee) {
+        registerDetailsRepository.save(employee);
+        return "Employee Added Successfully";
     }
 
-    public String deleteEmployee(int id) {
-        if (employeeRepository.existsById(id)) {
-            employeeRepository.deleteById(id);
-            return "Employee Deleted Successfully!!";
-        }
-        return "Employee With Id: "+id+" Not Found!";
+    public String updateEmployee(int empId) {
+        RegisterDetails user = registerDetailsRepository.findById(empId)
+                .orElseThrow(()->new RuntimeException("No Such User Present"));
+        registerDetailsRepository.save(user);
+        return "Employee Updated Successfully";
     }
 
-    public Employee updateEmployee(int id, Employee updatedEmployee) {
-        return employeeRepository.findById(id).map(employee -> {
-            employee.setName(updatedEmployee.getName());
-            employee.setRole(updatedEmployee.getRole());
-            return employeeRepository.save(employee);
-        }).orElse(null);
+    public String deleteEmployeeById(int empID) {
+        registerDetailsRepository.deleteById(empID);
+        return "Employee Deleted Successfully";
     }
 }
