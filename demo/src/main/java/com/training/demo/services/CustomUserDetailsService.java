@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 
-@Service
+// @Service
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     RegisterDetailsRepository registerDetailsRepository;
@@ -35,7 +35,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         //Step 2
         Set<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(roles -> new SimpleGrantedAuthority(roles.getRollName()))
+                .map(roles -> new SimpleGrantedAuthority(roles.getRoleName()))
                 .collect(Collectors.toSet());
         System.out.println("Username is " + user.getUserName() + "\nPassword is " + user.getPassword() + "\nAuthority is " + authorities);
         return new User(user.getUserName(), user.getPassword() ,authorities);
