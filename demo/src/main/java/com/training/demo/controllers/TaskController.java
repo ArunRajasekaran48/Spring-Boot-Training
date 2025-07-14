@@ -11,7 +11,7 @@ public class TaskController {
     @Autowired
     TaskService ts;
 
-    @GetMapping("/")
+    @GetMapping("/task")
     public List<TaskModel> getController(){
         return ts.getService();
     }
