@@ -5,6 +5,7 @@ import com.training.demo.models.UserDetailsDto;
 import com.training.demo.repository.RegisterDetailsRepository;
 import com.training.demo.repository.RolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class AuthService {
+public class AuthService  {
 
     @Autowired
     RegisterDetailsRepository registerDetailsRepository;

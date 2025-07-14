@@ -1,4 +1,6 @@
 package com.training.demo.controllers;
+import com.training.demo.models.TaskModel;
+import com.training.demo.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
