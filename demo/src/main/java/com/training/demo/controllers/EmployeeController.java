@@ -16,9 +16,13 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
 //    @PreAuthorize("hasAnyRole('ADMIN','USER')")
-    @GetMapping("/")
+    @GetMapping("/home")
     public String route(){
         return "Welcome to SpringBoot Security";
+    }
+    @GetMapping("/")
+    public List<RegisterDetails> getEmployees(){
+        return employeeService.getAllEmployees();
     }
 
     @GetMapping("/employee")

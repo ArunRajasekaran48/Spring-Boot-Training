@@ -13,6 +13,9 @@ public class EmployeeService {
     @Autowired
     RegisterDetailsRepository registerDetailsRepository;
 
+    public List<RegisterDetails> getAllEmployees(){
+        return registerDetailsRepository.findAll();
+    }
 
     public List<RegisterDetails> getMethod() {
         return registerDetailsRepository.findAll();
@@ -48,5 +51,6 @@ public class EmployeeService {
     public RegisterDetails getEmployeeByRole(String role) {
         return registerDetailsRepository.findByRole(role).orElse(new RegisterDetails());
     }
+
 
 }
