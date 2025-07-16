@@ -1,7 +1,7 @@
 package com.training.demo.controllers;
 
-import com.training.demo.models.Employee;
 import com.training.demo.models.RegisterDetails;
+import com.training.demo.models.UserDetailsDto;
 import com.training.demo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,11 +16,11 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
 //    @PreAuthorize("hasAnyRole('ADMIN','USER')")
-    @GetMapping("/home")
-    public String route(){
-        return "Welcome to SpringBoot Security";
-    }
     @GetMapping("/")
+    public String route(){
+        return "Welcome to Springboot Security";
+    }
+    @GetMapping("/get")
     public List<RegisterDetails> getEmployees(){
         return employeeService.getAllEmployees();
     }
@@ -40,20 +40,20 @@ public class EmployeeController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/employee")
-    public String postMethod(@RequestBody RegisterDetails employee){
+    public String postMethod(@RequestBody UserDetailsDto employee){
         return employeeService.addEmployee(employee);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/employee/{empId}")
-    public String putMethod(@PathVariable int empId,@RequestBody RegisterDetails details){
+    public String putMethod(@PathVariable int empId,@RequestBody UserDetailsDto details){
         return employeeService.updateEmployee(empId,details);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/employee/{empID}")
     public String deleteMethod(@PathVariable int empID){
-        return employeeService.deleteEmployeeById(empID);
+        return employeeService.deleteEmployee(empID);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
